@@ -15,3 +15,8 @@ class LocalArtifactStore:
         path.parent.mkdir(parents=True, exist_ok=True)
         path.write_text(content, encoding="utf-8")
         return path
+
+    def write_json(self, relative_path: str, data: dict) -> Path:
+        import json
+        content = json.dumps(data, indent=2, ensure_ascii=False)
+        return self.write_text(relative_path, content)
